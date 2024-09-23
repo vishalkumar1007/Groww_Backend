@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors =  require('cors');
 
 // import files
 const userRoute = require('./routes/userRoute');
@@ -9,8 +10,16 @@ const createLogData = require('./middlewares/logMiddleware');
 // config .env
 dotenv.config();
 
+
 // create app
 const app = express();
+app.use(express.json());
+app.use(cors({
+    origin:'https://vishalkumar07.me/Groww/',
+    methods: ['GET', 'POST','PUT','PATCH'],
+    credentials: true
+}))
+
 
 // custom middleware
 app.use((req,res,next)=>{
