@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin:'https://vishalkumar07.me/Groww/',
+    origin:'http://localhost:3000',
     methods: ['GET', 'POST','PUT','PATCH'],
     credentials: true
 }))
