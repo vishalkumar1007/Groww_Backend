@@ -14,11 +14,19 @@ dotenv.config();
 // create app
 const app = express();
 app.use(express.json());
+
+const allowedOrigins = ['http://localhost:3000', 'https://vishalkumar07.me'];
+
 app.use(cors({
-    origin:'http://localhost:3000',
-    methods: ['GET', 'POST','PUT','PATCH'],
-    credentials: true
-}))
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 
 // custom middleware
