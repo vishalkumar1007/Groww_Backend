@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors =  require('cors');
+const path = require('path');
 
 // import files
 const userRoute = require('./routes/userRoute');
@@ -14,6 +15,22 @@ dotenv.config();
 // create app
 const app = express();
 app.use(express.json());
+
+app.set('view engine', 'ejs');
+
+// Define the views folder
+app.set('views', path.join(__dirname, 'views'));
+
+
+
+// Remove part -------------
+app.get('/format/email',(req,res)=>{
+  const otp = '12221'
+  res.render('otpEmailFormat',{otp})
+});
+// Remove part ------------
+
+
 // app.use(express.urlencoded());
 
 const allowedOrigins = ['http://localhost:3000', 'https://vishalkumar07.me'];
@@ -51,6 +68,10 @@ app.get('/',(req,res)=>{
         res.status(500).json({message:"Internal server error"});
     }
 });
+
+
+
+
 
 // configure PORT
 const PORT = process.env.PORT || 4040;
