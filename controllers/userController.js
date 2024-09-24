@@ -42,7 +42,7 @@ const handelUserSignUp = async (req, res) => {
 
 const handelToVerifyUserEmail = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email } = req.query;
 
         if (!email) {
             console.log('email must be required');
@@ -66,8 +66,9 @@ const handelToVerifyUserEmail = async (req, res) => {
 }
 
 const handelToUserLogin = async (req, res) => {
+    console.log(req.query.email ,'and ', req.query.password);
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.query;
         if (!(email && password)) {
             console.log('email and password must be required');
             res.status(401).json({ msg: 'email and password must be require from body json', status: 'access denied' });

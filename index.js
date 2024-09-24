@@ -14,6 +14,7 @@ dotenv.config();
 // create app
 const app = express();
 app.use(express.json());
+// app.use(express.urlencoded());
 
 const allowedOrigins = ['http://localhost:3000', 'https://vishalkumar07.me'];
 
