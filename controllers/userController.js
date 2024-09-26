@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel');
 const otpModel = require('../models/otpModel.js');
 const nodemailer = require('nodemailer');
+const { process_params } = require('express/lib/router/index.js');
 
 
 // Handel User Signup
@@ -118,6 +119,14 @@ const handelToUserForgotPassword = async (req, res) => {
             return;
         }
 
+        const checkUserOnOtp = await otpModel.findOne({email});
+        if(checkUserOnOtp){
+            console.log("user already exist in db , it not deleted after 2 min");
+            res.status(400).json({msg:"otp is still valid now , send it after 2 min"});
+            return;
+        }
+
+
         const generateOtp = async (length) => {
             let getOtp = '';
             for (let i = 1; i <= length; i++) {
@@ -159,8 +168,8 @@ const handelToUserForgotPassword = async (req, res) => {
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: 'vishal.kumar.17.official@gmail.com',
-                        pass: 'tdtm wapt vhrl zehl',
+                        user: process.env.OFFICIAL_EMAIL,
+                        pass: process.env.OFFICIAL_EMAIL_PASSWORD,
                     }
                 });
 
@@ -232,7 +241,7 @@ const handelToUserForgotPassword = async (req, res) => {
     }
 }
 
-
+// html format for mail
 const OtpMailFormatHtml = (otp) => {
     return `
         <!DOCTYPE html>
