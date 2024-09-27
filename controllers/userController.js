@@ -1,7 +1,6 @@
 const userModel = require('../models/userModel');
 const otpModel = require('../models/otpModel.js');
 const nodemailer = require('nodemailer');
-const { process_params } = require('express/lib/router/index.js');
 
 
 // Handel User Signup
@@ -71,7 +70,6 @@ const handelToVerifyUserEmail = async (req, res) => {
     }
 }
 
-
 // Handel User Login
 const handelToUserLogin = async (req, res) => {
 
@@ -122,7 +120,7 @@ const handelToUserForgotPassword = async (req, res) => {
         const checkUserOnOtp = await otpModel.findOne({email});
         if(checkUserOnOtp){
             console.log("user already exist in db , it not deleted after 2 min");
-            res.status(400).json({msg:"otp is still valid now , send it after 2 min"});
+            res.status(400).json({msg:"otp is still valid now , send it after 2 min" ,  status:"access denied"});
             return;
         }
 
@@ -241,6 +239,67 @@ const handelToUserForgotPassword = async (req, res) => {
     }
 }
 
+// Handel Verify OTP 
+const handelVerificationOtpForForgot = async (req,res)=>{
+    try{
+        const {email,otp} = req.query;
+
+        if(!(email && otp)){
+            console.log('email and otp must be require ');
+            res.status(401).json({msg:`email and otp must be require`, status:"access denied"});
+            return;
+        }
+
+        const isValidEmail = await otpModel.findOne({email});
+        if(!isValidEmail){
+            console.log('Not found any otp with this id ', email);
+            res.status(404).json({msg:`We not found any otp with ${email} id`, status:"access denied"});
+            return ;
+        }
+
+        if(isValidEmail.otp === otp){
+            console.log(`OTP verification Successful`);
+            res.status(200).json({msg:'OTP verification successful ' , status:"access granted"});
+            return;
+        }
+
+        console.log(`OTP verification fail , Wrong OTP`);
+        res.status(403).json({msg:'OTP verification fail , Wrong OTP' , status:"access denied"});
+
+    }catch(err){
+        console.log("Internal Server Error on Otp verification");
+        res.status(500).json({msg:'Internal server error', status:"access denied"});
+    }
+}
+
+
+// Handel Update Password
+
+const handelToUpdatePassword = async (req,res)=>{
+    try {
+        const {email,password} = req.body;
+        
+        if(!(email,password)){
+            console.log('email and password required');
+            res.status(401).json({msg:'email and pass required ', status:"access denied"});
+            return;
+        }
+        const updateData = await userModel.findOneAndUpdate({email} , {password});
+
+        if(updateData){
+            console.log('Password update successful');
+            res.status(200).json({msg:'user password update successful', status:'access granted'});
+            return;
+        }
+        console.log('user not found with email');
+        res.status(404).json({msg:'user not found', status:'access denied'});
+
+    } catch (error) {
+        console.log('Internal server error');
+        res.status(500).json({msg:'Internal server Error' , status:'access denied'});
+    }
+}
+
 // html format for mail
 const OtpMailFormatHtml = (otp) => {
     return `
@@ -350,7 +409,7 @@ const OtpMailFormatHtml = (otp) => {
                         One-Time Verification Code
                     </p>
                     <h1>${otp}</h1>
-                    <p id="xht2">Note : This code was only valid for next 2 minutes</p>
+                    <p id="xht2">Note : This code is only valid for next 2 minutes</p>
                     <p id="xht3">Trouble in OTP validation ? <a href="https://vishalkumar07.me">report</a></p>
                 </div>
                 <div class="footer">
@@ -363,9 +422,12 @@ const OtpMailFormatHtml = (otp) => {
     `
 }
 
+
 module.exports = {
     handelUserSignUp,
     handelToVerifyUserEmail,
     handelToUserLogin,
-    handelToUserForgotPassword
+    handelToUserForgotPassword,
+    handelVerificationOtpForForgot,
+    handelToUpdatePassword
 }
