@@ -5,7 +5,7 @@ const path = require('path');
 
 // import files
 const userRoute = require('./routes/userRoute');
-// const stockRouter = require('./routes/stockRoute');
+const stockRoute = require('./routes/stockRoute');
 const ConnectDB = require('./connection/connection');
 const createLogData = require('./middlewares/logMiddleware');
 
@@ -21,7 +21,6 @@ app.set('view engine', 'ejs');
 
 // Define the views folder
 app.set('views', path.join(__dirname, 'views'));
-
 
 
 // Remove part -------------
@@ -70,16 +69,12 @@ app.get('/',(req,res)=>{
     }
 });
 
-
-
-
-
 // configure PORT
 const PORT = process.env.PORT || 4040;
 
 // setup routes
 app.use('/api/user',userRoute);
-// app.use('/api/stock',stockRouter);
+app.use('/api/stock',stockRoute);
 
 // make listen our server to http
 app.listen(PORT,()=>{

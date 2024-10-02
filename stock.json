@@ -1,0 +1,456 @@
+[
+  {
+    "id": "reliance-industries-ltd",
+    "name": "Reliance Industries",
+    "logoUrl": "https://assets-netstorage.groww.in/stock-assets/logos/GSTK500325.png",
+    "stockCost": "2,543.75",
+    "stockCostPerRate": "15.30 (0.60%)",
+    "performance": {
+      "todayLow": "2,525.00",
+      "todayHigh": "2,560.50",
+      "FTW_low": "2,480.25",
+      "FTW_high": "2,575.80",
+      "open": "2,530.00",
+      "close": "2,543.75",
+      "volume": "8,76,543",
+      "totalTradeValue": "2,230.45 Cr",
+      "upperCircuit": "2,670.95",
+      "lowerCircuit": "2,416.55"
+    },
+    "fundamentals": {
+      "marketCap": "17,20,345 Cr",
+      "ROE": "9.87",
+      "PE_ratio": "30.25",
+      "EPS": "84.09",
+      "PB_ratio": "2.98",
+      "dividendYield": "0.35",
+      "Industry": "Oil & Gas",
+      "bookValue": "853.24",
+      "debtToEquity": "0.67",
+      "faceValue": "10.00"
+    },
+    "financial": {
+      "revenueGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "1,53,210",
+            "date": "Jun'23",
+            "graphPercent": "78"
+          },
+          "graph2": {
+            "rateInCr": "1,75,830",
+            "date": "Sep'23",
+            "graphPercent": "85"
+          },
+          "graph3": {
+            "rateInCr": "1,69,420",
+            "date": "Dec'23",
+            "graphPercent": "82"
+          },
+          "graph4": {
+            "rateInCr": "1,82,560",
+            "date": "Mar'24",
+            "graphPercent": "89"
+          },
+          "graph5": {
+            "rateInCr": "1,90,780",
+            "date": "Jun'24",
+            "graphPercent": "93"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "5,89,540",
+            "date": "2020",
+            "graphPercent": "65"
+          },
+          "graph2": {
+            "rateInCr": "5,39,230",
+            "date": "2021",
+            "graphPercent": "60"
+          },
+          "graph3": {
+            "rateInCr": "7,21,890",
+            "date": "2022",
+            "graphPercent": "80"
+          },
+          "graph4": {
+            "rateInCr": "7,92,560",
+            "date": "2023",
+            "graphPercent": "88"
+          },
+          "graph5": {
+            "rateInCr": "8,45,320",
+            "date": "2024",
+            "graphPercent": "94"
+          }
+        }
+      },
+      "profitGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "13,680",
+            "date": "Jun'23",
+            "graphPercent": "72"
+          },
+          "graph2": {
+            "rateInCr": "15,230",
+            "date": "Sep'23",
+            "graphPercent": "80"
+          },
+          "graph3": {
+            "rateInCr": "14,890",
+            "date": "Dec'23",
+            "graphPercent": "78"
+          },
+          "graph4": {
+            "rateInCr": "16,540",
+            "date": "Mar'24",
+            "graphPercent": "87"
+          },
+          "graph5": {
+            "rateInCr": "17,230",
+            "date": "Jun'24",
+            "graphPercent": "91"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "39,880",
+            "date": "2020",
+            "graphPercent": "55"
+          },
+          "graph2": {
+            "rateInCr": "53,740",
+            "date": "2021",
+            "graphPercent": "74"
+          },
+          "graph3": {
+            "rateInCr": "60,320",
+            "date": "2022",
+            "graphPercent": "83"
+          },
+          "graph4": {
+            "rateInCr": "66,780",
+            "date": "2023",
+            "graphPercent": "92"
+          },
+          "graph5": {
+            "rateInCr": "71,230",
+            "date": "2024",
+            "graphPercent": "98"
+          }
+        }
+      },
+      "netWorthGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "5,43,210",
+            "date": "Jun'23",
+            "graphPercent": "85"
+          },
+          "graph2": {
+            "rateInCr": "5,56,780",
+            "date": "Sep'23",
+            "graphPercent": "87"
+          },
+          "graph3": {
+            "rateInCr": "5,70,320",
+            "date": "Dec'23",
+            "graphPercent": "89"
+          },
+          "graph4": {
+            "rateInCr": "5,85,690",
+            "date": "Mar'24",
+            "graphPercent": "92"
+          },
+          "graph5": {
+            "rateInCr": "6,01,230",
+            "date": "Jun'24",
+            "graphPercent": "94"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "4,37,890",
+            "date": "2020",
+            "graphPercent": "68"
+          },
+          "graph2": {
+            "rateInCr": "4,85,320",
+            "date": "2021",
+            "graphPercent": "76"
+          },
+          "graph3": {
+            "rateInCr": "5,24,780",
+            "date": "2022",
+            "graphPercent": "82"
+          },
+          "graph4": {
+            "rateInCr": "5,73,450",
+            "date": "2023",
+            "graphPercent": "90"
+          },
+          "graph5": {
+            "rateInCr": "6,12,890",
+            "date": "2024",
+            "graphPercent": "96"
+          }
+        }
+      }
+    },
+    "shareHolderPattern": {
+      "Day1": {
+        "date": "Jun'23",
+        "promotersPercent": "50.55",
+        "retailAndOtherPercent": "24.75",
+        "otherDomesticIndustryPercent": "24.70"
+      },
+      "Day2": {
+        "date": "Sep'23",
+        "promotersPercent": "50.49",
+        "retailAndOtherPercent": "25.02",
+        "otherDomesticIndustryPercent": "24.49"
+      },
+      "Day3": {
+        "date": "Dec'23",
+        "promotersPercent": "50.39",
+        "retailAndOtherPercent": "25.31",
+        "otherDomesticIndustryPercent": "24.30"
+      },
+      "Day4": {
+        "date": "Mar'24",
+        "promotersPercent": "50.28",
+        "retailAndOtherPercent": "25.58",
+        "otherDomesticIndustryPercent": "24.14"
+      }
+    }
+  },
+  {
+    "id": "tata-consultancy-services-ltd",
+    "name": "Tata Consultancy Services",
+    "logoUrl": "https://assets-netstorage.groww.in/stock-assets/logos/GSTK532540.png",
+    "stockCost": "3,456.80",
+    "stockCostPerRate": "22.50 (0.65%)",
+    "performance": {
+      "todayLow": "3,425.00",
+      "todayHigh": "3,470.25",
+      "FTW_low": "3,380.50",
+      "FTW_high": "3,495.75",
+      "open": "3,440.00",
+      "close": "3,456.80",
+      "volume": "12,34,567",
+      "totalTradeValue": "4,265.78 Cr",
+      "upperCircuit": "3,629.65",
+      "lowerCircuit": "3,283.95"
+    },
+    "fundamentals": {
+      "marketCap": "12,65,432 Cr",
+      "ROE": "35.80",
+      "PE_ratio": "28.75",
+      "EPS": "120.23",
+      "PB_ratio": "10.32",
+      "dividendYield": "1.45",
+      "Industry": "IT Services",
+      "bookValue": "335.15",
+      "debtToEquity": "0.08",
+      "faceValue": "1.00"
+    },
+    "financial": {
+      "revenueGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "52,758",
+            "date": "Jun'23",
+            "graphPercent": "82"
+          },
+          "graph2": {
+            "rateInCr": "55,309",
+            "date": "Sep'23",
+            "graphPercent": "86"
+          },
+          "graph3": {
+            "rateInCr": "58,229",
+            "date": "Dec'23",
+            "graphPercent": "91"
+          },
+          "graph4": {
+            "rateInCr": "59,162",
+            "date": "Mar'24",
+            "graphPercent": "92"
+          },
+          "graph5": {
+            "rateInCr": "61,655",
+            "date": "Jun'24",
+            "graphPercent": "96"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "1,64,177",
+            "date": "2020",
+            "graphPercent": "64"
+          },
+          "graph2": {
+            "rateInCr": "1,64,177",
+            "date": "2021",
+            "graphPercent": "64"
+          },
+          "graph3": {
+            "rateInCr": "1,91,754",
+            "date": "2022",
+            "graphPercent": "75"
+          },
+          "graph4": {
+            "rateInCr": "2,25,458",
+            "date": "2023",
+            "graphPercent": "88"
+          },
+          "graph5": {
+            "rateInCr": "2,42,447",
+            "date": "2024",
+            "graphPercent": "95"
+          }
+        }
+      },
+      "profitGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "9,478",
+            "date": "Jun'23",
+            "graphPercent": "78"
+          },
+          "graph2": {
+            "rateInCr": "10,431",
+            "date": "Sep'23",
+            "graphPercent": "86"
+          },
+          "graph3": {
+            "rateInCr": "11,058",
+            "date": "Dec'23",
+            "graphPercent": "91"
+          },
+          "graph4": {
+            "rateInCr": "11,392",
+            "date": "Mar'24",
+            "graphPercent": "94"
+          },
+          "graph5": {
+            "rateInCr": "11,885",
+            "date": "Jun'24",
+            "graphPercent": "98"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "32,430",
+            "date": "2020",
+            "graphPercent": "67"
+          },
+          "graph2": {
+            "rateInCr": "32,430",
+            "date": "2021",
+            "graphPercent": "67"
+          },
+          "graph3": {
+            "rateInCr": "38,327",
+            "date": "2022",
+            "graphPercent": "79"
+          },
+          "graph4": {
+            "rateInCr": "42,359",
+            "date": "2023",
+            "graphPercent": "87"
+          },
+          "graph5": {
+            "rateInCr": "45,766",
+            "date": "2024",
+            "graphPercent": "94"
+          }
+        }
+      },
+      "netWorthGraph": {
+        "quarterly": {
+          "graph1": {
+            "rateInCr": "94,108",
+            "date": "Jun'23",
+            "graphPercent": "82"
+          },
+          "graph2": {
+            "rateInCr": "98,892",
+            "date": "Sep'23",
+            "graphPercent": "86"
+          },
+          "graph3": {
+            "rateInCr": "1,03,773",
+            "date": "Dec'23",
+            "graphPercent": "90"
+          },
+          "graph4": {
+            "rateInCr": "1,09,020",
+            "date": "Mar'24",
+            "graphPercent": "95"
+          },
+          "graph5": {
+            "rateInCr": "1,14,502",
+            "date": "Jun'24",
+            "graphPercent": "99"
+          }
+        },
+        "yearly": {
+          "graph1": {
+            "rateInCr": "84,126",
+            "date": "2020",
+            "graphPercent": "73"
+          },
+          "graph2": {
+            "rateInCr": "84,126",
+            "date": "2021",
+            "graphPercent": "73"
+          },
+          "graph3": {
+            "rateInCr": "89,139",
+            "date": "2022",
+            "graphPercent": "77"
+          },
+          "graph4": {
+            "rateInCr": "1,03,281",
+            "date": "2023",
+            "graphPercent": "90"
+          },
+          "graph5": {
+            "rateInCr": "1,15,120",
+            "date": "2024",
+            "graphPercent": "100"
+          }
+        }
+      },
+      "shareHolderPattern": {
+        "Day1": {
+          "date": "Jun'23",
+          "promotersPercent": "36",
+          "retailAndOtherPercent": "32",
+          "otherDomesticIndustryPercent": "12"
+        },
+        "Day2": {
+          "date": "Sep'23",
+          "promotersPercent": "59",
+          "retailAndOtherPercent": "76",
+          "otherDomesticIndustryPercent": "84"
+        },
+        "Day3": {
+          "date": "Dec'23",
+          "promotersPercent": "37",
+          "retailAndOtherPercent": "63",
+          "otherDomesticIndustryPercent": "88"
+        },
+        "Day4": {
+          "date": "Mar'24",
+          "promotersPercent": "46",
+          "retailAndOtherPercent": "63",
+          "otherDomesticIndustryPercent": "99"
+        }
+      }
+    }
+  }
+]
