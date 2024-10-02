@@ -6,8 +6,8 @@ const handelToGetStockData = async (req,res)=>{
         const {stock_id} = req.query;
 
         if(!stock_id){
-            console.log('Stock id require');
-            res.status(401).json({msg:'stock id require'});
+            console.log('stock_id require');
+            res.status(401).json({msg:'expect stock_id through params'});
             return;
         }
 
@@ -67,9 +67,6 @@ const handelToGetStockHeadLimit = async (req,res)=>{
         res.status(500).json({ msg: 'Internal server error', status: 'access denied' });
     }
 }
-
-
-
 
 module.exports = {
     handelToGetStockData,
