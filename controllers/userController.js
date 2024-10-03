@@ -117,10 +117,39 @@ const handelToUserForgotPassword = async (req, res) => {
             return;
         }
 
+        
+        const requestToDeleteOtpFromDB = async (email) => {
+            try {
+                const result = await otpModel.findOneAndDelete({ email });
+
+                if (result) {
+                    console.log('OTP deleted successfully from DB');
+                    return true;
+                } else {
+                    console.log('No OTP found to delete');
+                    return false;
+                }
+            } catch (error) {
+                console.log('Error deleting OTP from DB:', error);
+                return false;
+            }
+        }
+
         const checkUserOnOtp = await otpModel.findOne({email});
         if(checkUserOnOtp){
-            console.log("user already exist in db , it not deleted after 2 min");
-            res.status(400).json({msg:"otp is still valid now , send it after 2 min" ,  status:"access denied"});
+            console.log("user already exist in db , it not deleted after 2 min , try to delete ... , send request after 2 min");
+            
+            setTimeout(async () => {
+                const isOtpDeleted = await requestToDeleteOtpFromDB(email);
+                
+                if (isOtpDeleted) {
+                    console.log(`QUEUE OPERATION SUCCESSFUL DELETE OTP OF USER: ${email}`);
+                } else {
+                    console.log(`QUEUE OPERATION USER: ${email} OTP DELETE UNSUCCESSFUL`);
+                }
+            }, 120_000);
+            
+            res.status(400).json({msg:"otp is still valid now , add in queue to delete ... , send it after 2 min" ,  status:"access denied"});
             return;
         }
 
@@ -190,22 +219,6 @@ const handelToUserForgotPassword = async (req, res) => {
             }
         }
 
-        const requestToDeleteOtpFromDB = async (email) => {
-            try {
-                const result = await otpModel.findOneAndDelete({ email });
-
-                if (result) {
-                    console.log('OTP deleted successfully from DB');
-                    return true;
-                } else {
-                    console.log('No OTP found to delete');
-                    return false;
-                }
-            } catch (error) {
-                console.log('Error deleting OTP from DB:', error);
-                return false;
-            }
-        }
 
         if (!otp) {
             return res.status(500).json({ msg: 'Server Error on OTP', status: 'access denied' });
