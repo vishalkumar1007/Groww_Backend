@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel');
 const otpModel = require('../models/otpModel.js');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 
 // Handel User Signup
@@ -89,8 +90,21 @@ const handelToUserLogin = async (req, res) => {
         }
 
         if (userData.password === password && userData.email === email) {
+
             console.log('Password matched');
-            res.status(200).json({ msg: 'email or password matched', status: 'access granted' })
+
+            const payLoad = {
+                userId : userData._id,
+                userFirstName : userData.firstName,
+                userLastName: userData.lastName,
+                userEmail : userData.email,
+            }
+
+            const Secret_Key = process.env.AUTH_SECRET_KEY;
+
+            const token = jwt.sign(payLoad,Secret_Key,{expiresIn:'1h'});
+            res.status(200).json({ msg: 'email or password matched', status: 'access granted', token });
+
         } else {
             console.log('Password wrong');
             res.status(400).json({ msg: 'email or password wrong', status: 'access denied' });
@@ -313,6 +327,40 @@ const handelToUpdatePassword = async (req,res)=>{
     }
 }
 
+// Handel Verify JWT Token
+
+const handelToVerifyToken = (req,res)=>{
+    try {
+        const authHeaderToken = req.headers.authorization;
+        if(!authHeaderToken){
+            console.log('auth token require');
+            res.status(401).json({msg:'auth token require ', status:"access denied"});
+            return;
+        }
+        const token = authHeaderToken.split(' ')[1];
+        const Secret_Key = process.env.AUTH_SECRET_KEY;
+
+        jwt.verify(token, Secret_Key, (error,decode)=>{
+            if(error){
+                if(error.name === 'TokenExpiredError'){
+                    console.log('token expired login');
+                    res.status(401).json({ msg: 'Token Expired', status: 'access denied' });
+                }else{
+                    console.log('token authentication failed');
+                    res.status(401).json({ msg: 'Token verify fail', status: 'access denied'});
+                }
+                return ;
+            }
+            console.log('token verify successful');
+            res.status(200).json({msg:'token verify successful' , status:'access granted' , decode});
+        })
+        
+    } catch (error) {
+        console.log('Internal server error');
+        res.status(500).json({msg:'Internal server Error' , status:'access denied'});
+    }
+}
+
 // html format for mail
 const OtpMailFormatHtml = (otp) => {
     return `
@@ -442,5 +490,6 @@ module.exports = {
     handelToUserLogin,
     handelToUserForgotPassword,
     handelVerificationOtpForForgot,
-    handelToUpdatePassword
+    handelToUpdatePassword,
+    handelToVerifyToken
 }
