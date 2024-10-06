@@ -3,7 +3,6 @@ const otpModel = require('../models/otpModel.js');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
-
 // Handel User Signup
 const handelUserSignUp = async (req, res) => {
     try {
@@ -18,11 +17,26 @@ const handelUserSignUp = async (req, res) => {
             return;
         }
 
+        
+
+        const generateColorCode = () =>{
+            let colorCode = '#';
+            const hexCode = (number) => { return number.toString(16).padStart(2, '0') };
+            for(let i=1; i<=3 ; i++){
+                const code = hexCode(Math.trunc(Math.random()*195));
+                colorCode += `${code}`;
+            }
+            return colorCode;
+        }
+
+        const colorCode = generateColorCode();
+
         const newUser = {
             firstName,
             lastName,
             email,
             password,
+            colorCode
         }
 
         userModel.create(newUser)
@@ -98,12 +112,13 @@ const handelToUserLogin = async (req, res) => {
                 userFirstName : userData.firstName,
                 userLastName: userData.lastName,
                 userEmail : userData.email,
+                userColorCode : userData.colorCode
             }
 
             const Secret_Key = process.env.AUTH_SECRET_KEY;
 
             const token = jwt.sign(payLoad,Secret_Key,{expiresIn:'1h'});
-            res.status(200).json({ msg: 'email or password matched', status: 'access granted', token });
+            res.status(200).json({ msg: 'email or password matched', status: 'access granted', token , payLoad});
 
         } else {
             console.log('Password wrong');
