@@ -376,6 +376,7 @@ const handelToVerifyToken = (req,res)=>{
     }
 }
 
+
 // html format for mail
 const OtpMailFormatHtml = (otp) => {
     return `
@@ -497,6 +498,7 @@ const OtpMailFormatHtml = (otp) => {
         </html>
     `
 }
+
 
 
 module.exports = {

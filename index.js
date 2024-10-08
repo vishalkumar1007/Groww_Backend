@@ -6,6 +6,7 @@ const path = require('path');
 // import files
 const userRoute = require('./routes/userRoute');
 const stockRoute = require('./routes/stockRoute');
+const activityRoute = require('./routes/activityRoute');
 const ConnectDB = require('./connection/connection');
 const createLogData = require('./middlewares/logMiddleware');
 
@@ -75,6 +76,7 @@ const PORT = process.env.PORT || 4040;
 // setup routes
 app.use('/api/user',userRoute);
 app.use('/api/stock',stockRoute);
+app.use('/api/activity', activityRoute);
 
 // make listen our server to http
 app.listen(PORT,()=>{
