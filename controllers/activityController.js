@@ -1,7 +1,20 @@
 const userVisitRecordModel = require('../models/userVisitRecordModel');
 
 const handelToRecordUserVisit = async (req, res) => {
+
     try {
+        const secretKeyAuth = req.headers.secretkeyauth;
+        console.log(secretKeyAuth);
+        if(!secretKeyAuth){
+            res.status(401).json({ msg: 'secretKeyAuth requires', success: 'access denied' });
+            return;
+        }
+        
+        if(secretKeyAuth !== 'authActivityNewVisit07'){
+            res.status(401).json({ msg: 'incorrect auth key', success: 'access denied' });
+            return;
+        }
+
         const RangeCharacter = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let UserRecordCode = '';
         for (let i = 0; i < 15; i++) {
