@@ -117,7 +117,7 @@ const handelToUserLogin = async (req, res) => {
 
             const Secret_Key = process.env.AUTH_SECRET_KEY;
 
-            const token = jwt.sign(payLoad,Secret_Key,{expiresIn:'1h'});
+            const token = jwt.sign(payLoad,Secret_Key,{expiresIn:'7d'});
             res.status(200).json({ msg: 'email or password matched', status: 'access granted', token , payLoad});
 
         } else {
