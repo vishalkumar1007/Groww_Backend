@@ -16,7 +16,7 @@ const mostBoughtOnGroww = async (req, res) => {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
         const isAlreadyData = await mostBoughtModel.find({});
         console.log('No data in mostBoughtOnGroww : ',isAlreadyData.length==0);
-        if (!mostBoughtToken || isAlreadyData.length===0) {
+        if (isAlreadyData.length===0 || !mostBoughtToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
@@ -111,7 +111,7 @@ const topGainer = async (req, res) => {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
         const isAlreadyData = await topGainersModel.find({});
         console.log('No data in topGainer : ',isAlreadyData.length===0);
-        if (!topGainerToken || isAlreadyData.length===0) {
+        if (isAlreadyData.length===0 || !topGainerToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
@@ -206,7 +206,7 @@ const stockInNews = async (req, res) => {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
         const isAlreadyData = await newsOfStockModel.find({});
         console.log('No data in stockInNews : ',isAlreadyData.length===0);
-        if (!stockNewsToken || isAlreadyData.length===0) {
+        if (isAlreadyData.length===0 || !stockNewsToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
@@ -302,7 +302,7 @@ const topLosers = async (req, res) => {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
         const isAlreadyData = await topLosersModel.find({});
         console.log('No data in topLosers : ',isAlreadyData.length===0);
-        if (!topLoserToken || isAlreadyData.length===0) {
+            if (isAlreadyData.length===0 || !topLoserToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
