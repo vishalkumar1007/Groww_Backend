@@ -14,14 +14,18 @@ let topLoserToken = null;
 const mostBoughtOnGroww = async (req, res) => {
     try {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
-        const isAlreadyData = await mostBoughtModel.find({});
-        console.log('No data in mostBoughtOnGroww : ',isAlreadyData.length==0);
-        if (isAlreadyData.length===0 || !mostBoughtToken) {
+
+        if (!mostBoughtToken) {
             // add new data into db of mostBought
+            console.log('ok ==== 1');
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
                 res.status(404).json({ msg: 'not getting data from allStockHeadModel', success: 'access denied' });
                 return;
+            }
+            const msData = await mostBoughtModel.find({});
+            if (msData.length > 0) {
+                await mostBoughtModel.deleteMany({});
             }
 
             for (let i = 1; i <= 4; i++) {
@@ -50,6 +54,7 @@ const mostBoughtOnGroww = async (req, res) => {
         jwt.verify(mostBoughtToken, Secret_Key, async (err, decode) => {
             if (err) {
                 if (err.name === 'TokenExpiredError') {
+                    console.log('ok ==== 4');
                     console.log('Token expires -- process of new data in mostBoughtOnGroww');
                     const AllStockHeadData = await allStockHeadModel.find({});
                     if (!AllStockHeadData) {
@@ -85,13 +90,13 @@ const mostBoughtOnGroww = async (req, res) => {
                     console.log('token generated in mostBoughtOnGroww');
 
                 } else {
-                    console.log('token auth fail in mostBoughtOnGroww')
+                    console.log('token auth fail in mostBoughtOnGroww');
                     res.status(400).json({ msg: 'token auth fail in mostBoughtOnGroww', success: 'access denied' });
                     return;
                 }
             }
             const mostBoughtStockData = await mostBoughtModel.find({});
-            if(!mostBoughtStockData){
+            if (!mostBoughtStockData) {
                 res.status(404).json({ msg: 'Data not found in mostBoughtOnGroww', success: 'access denied' });
                 return;
             }
@@ -109,14 +114,18 @@ const mostBoughtOnGroww = async (req, res) => {
 const topGainer = async (req, res) => {
     try {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
-        const isAlreadyData = await topGainersModel.find({});
-        console.log('No data in topGainer : ',isAlreadyData.length===0);
-        if (isAlreadyData.length===0 || !topGainerToken) {
+
+        if (!topGainerToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
                 res.status(404).json({ msg: 'not getting data from AllStockHeadData', success: 'access denied' });
                 return;
+            }
+
+            const msData = await topGainersModel.find({});
+            if (msData.length > 0) {
+                await topGainersModel.deleteMany({});
             }
 
             for (let i = 1; i <= 4; i++) {
@@ -186,7 +195,7 @@ const topGainer = async (req, res) => {
                 }
             }
             const topGainerStockData = await topGainersModel.find({});
-            if(!topGainerStockData){
+            if (!topGainerStockData) {
                 res.status(404).json({ msg: 'Data not found in topGainer', success: 'access denied' });
                 return;
             }
@@ -204,14 +213,18 @@ const topGainer = async (req, res) => {
 const stockInNews = async (req, res) => {
     try {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
-        const isAlreadyData = await newsOfStockModel.find({});
-        console.log('No data in stockInNews : ',isAlreadyData.length===0);
-        if (isAlreadyData.length===0 || !stockNewsToken) {
+
+        if (!stockNewsToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
                 res.status(404).json({ msg: 'not getting data from allStockHeadModel', success: 'access denied' });
                 return;
+            }
+
+            const msData = await newsOfStockModel.find({});
+            if (msData.length > 0) {
+                await newsOfStockModel.deleteMany({});
             }
 
             for (let i = 1; i <= 4; i++) {
@@ -281,7 +294,7 @@ const stockInNews = async (req, res) => {
                 }
             }
             const stockInNewsData = await newsOfStockModel.find({});
-            if(!stockInNewsData){
+            if (!stockInNewsData) {
                 res.status(404).json({ msg: 'Data not found', success: 'access denied' });
                 return;
             }
@@ -297,17 +310,20 @@ const stockInNews = async (req, res) => {
 
 
 const topLosers = async (req, res) => {
-    console.log('we are in top loser');
     try {
         const Secret_Key = process.env.AUTH_SECRET_KEY;
-        const isAlreadyData = await topLosersModel.find({});
-        console.log('No data in topLosers : ',isAlreadyData.length===0);
-            if (isAlreadyData.length===0 || !topLoserToken) {
+
+        if (!topLoserToken) {
             // add new data into db of mostBought
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
                 res.status(404).json({ msg: 'not getting data from allStockHeadModel', success: 'access denied' });
                 return;
+            }
+
+            const msData = await topLosersModel.find({});
+            if (msData.length > 0) {
+                await topLosersModel.deleteMany({});
             }
 
             for (let i = 1; i <= 4; i++) {
@@ -377,7 +393,7 @@ const topLosers = async (req, res) => {
                 }
             }
             const topLoserStockData = await topLosersModel.find({});
-            if(!topLoserStockData){
+            if (!topLoserStockData) {
                 res.status(404).json({ msg: 'Data not found', success: 'access denied' });
                 return;
             }
@@ -392,4 +408,4 @@ const topLosers = async (req, res) => {
 }
 
 
-module.exports = {mostBoughtOnGroww , topGainer , stockInNews , topLosers}
+module.exports = { mostBoughtOnGroww, topGainer, stockInNews, topLosers }
