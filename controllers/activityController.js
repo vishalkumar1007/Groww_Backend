@@ -44,4 +44,20 @@ const handelToRecordUserVisit = async (req, res) => {
     }
 }
 
-module.exports = { handelToRecordUserVisit }
+const getVisitorNumber = async (req,res) =>{
+    try {
+        const data = await userVisitRecordModel.find();
+        if(!data){
+            res.status(404).json({msg:'data not found'});
+            return;
+        }
+        
+        res.status(200).json({visitorCountNumber:data[0].visitCount});
+    } catch (error) {
+        console.log('server error in getVisitor');
+        res.status(500).json({msg:'Server error', success:'access denied'});
+    }
+}
+
+
+module.exports = { handelToRecordUserVisit , getVisitorNumber}

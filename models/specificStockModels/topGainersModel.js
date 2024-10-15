@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const allStockHeadSchema = new mongoose.Schema({
+const topGainersSchema = new mongoose.Schema({
     name:{
         type:String,
         require:true
@@ -19,6 +19,5 @@ const allStockHeadSchema = new mongoose.Schema({
     }
 });
 
-const allStockHeadModel = mongoose.model('allStockHead',allStockHeadSchema);
-
-module.exports = allStockHeadModel;
+const topGainersModel = mongoose.model('TopGainerStock',topGainersSchema);
+module.exports = topGainersModel;

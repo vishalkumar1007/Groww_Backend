@@ -7,6 +7,7 @@ const path = require('path');
 const userRoute = require('./routes/userRoute');
 const stockRoute = require('./routes/stockRoute');
 const activityRoute = require('./routes/activityRoute');
+const specificStockRoute = require('./routes/specificStockRoute');
 const ConnectDB = require('./connection/connection');
 const createLogData = require('./middlewares/logMiddleware');
 
@@ -77,6 +78,7 @@ const PORT = process.env.PORT || 4040;
 app.use('/api/user',userRoute);
 app.use('/api/stock',stockRoute);
 app.use('/api/activity', activityRoute);
+app.use('/api/specific/stock', specificStockRoute);
 
 // make listen our server to http
 app.listen(PORT,()=>{

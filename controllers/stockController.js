@@ -55,6 +55,38 @@ const handelToGetStockHeadLimit = async (req,res)=>{
 
         const stockHeadDataLimit = await allStockHead.find({}).limit(Number(dataLen));
 
+
+        if(stockHeadDataLimit){
+            res.status(200).json(stockHeadDataLimit);
+            return;
+        }
+
+        res.status(404).json({msg:'data not found'});
+
+    } catch (error) {
+        console.log('Internal server error on handelAllStockHead')
+        res.status(500).json({ msg: 'Internal server error', status: 'access denied' });
+    }
+}
+
+const handelToGetStockHeadRandomData = async (req,res)=>{
+    try {
+        const {dataLen} = req.query;
+
+        if(!dataLen){
+            console.log('Data len is require in handelToGetStockHeadLimit');
+            res.status(401).json({msg:'expect dataLen in params'});
+            return;
+        }
+
+        const stockHeadData = await allStockHead.find({});
+        const stockHeadDataLimit = [];
+
+        for(let i=1;i<=dataLen;i++){
+            const randomNum = Math.floor(Math.random()*246);
+            stockHeadDataLimit.push(stockHeadData[randomNum]);
+        }
+
         if(stockHeadDataLimit){
             res.status(200).json(stockHeadDataLimit);
             return;
@@ -71,5 +103,6 @@ const handelToGetStockHeadLimit = async (req,res)=>{
 module.exports = {
     handelToGetStockData,
     handelAllStockHead,
-    handelToGetStockHeadLimit
+    handelToGetStockHeadLimit,
+    handelToGetStockHeadRandomData
 }
