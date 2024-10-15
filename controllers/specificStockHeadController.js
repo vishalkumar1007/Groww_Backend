@@ -10,6 +10,31 @@ let topGainerToken = null;
 let stockNewsToken = null;
 let topLoserToken = null;
 
+const getRandomStockData = async (AllStockHeadData, currentModel) => {
+    const radomData = [];
+    for (let i = 1; i <= 4; i++) {
+        const random = Math.floor(Math.random() * (AllStockHeadData.length));
+        const data = {
+            stock_id: AllStockHeadData[random].stock_id,
+            name: AllStockHeadData[random].name,
+            logoUrl: AllStockHeadData[random].logoUrl,
+            stockCost: AllStockHeadData[random].stockCost,
+            stockCostPerRate: AllStockHeadData[random].stockCostPerRate
+        }
+        radomData.push(data);
+    }
+    await currentModel.insertMany(radomData);
+}
+
+const generateToken = (Secret_Key, happenFn) => {
+    const payload = {
+        purpose: 'change data after 1m',
+        type: 'auth token'
+    }
+    const tokenVariable = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
+    console.log(`token generated in ${happenFn}`);
+    return tokenVariable;
+}
 
 const mostBoughtOnGroww = async (req, res) => {
     try {
@@ -17,7 +42,6 @@ const mostBoughtOnGroww = async (req, res) => {
 
         if (!mostBoughtToken) {
             // add new data into db of mostBought
-            console.log('ok ==== 1');
             const AllStockHeadData = await allStockHeadModel.find({});
             if (!AllStockHeadData) {
                 res.status(404).json({ msg: 'not getting data from allStockHeadModel', success: 'access denied' });
@@ -28,33 +52,17 @@ const mostBoughtOnGroww = async (req, res) => {
                 await mostBoughtModel.deleteMany({});
             }
 
-            for (let i = 1; i <= 4; i++) {
-                const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                const data = {
-                    stock_id: AllStockHeadData[random].stock_id,
-                    name: AllStockHeadData[random].name,
-                    logoUrl: AllStockHeadData[random].logoUrl,
-                    stockCost: AllStockHeadData[random].stockCost,
-                    stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                }
-
-                await mostBoughtModel.create(data);
-            }
+            // save 4 random data
+            await getRandomStockData(AllStockHeadData, mostBoughtModel);
 
             // generate jwt         
+            mostBoughtToken = generateToken(Secret_Key, 'mostBoughtOnGroww');
 
-            const payload = {
-                purpose: 'change data after 1m',
-                type: 'auth token'
-            }
-            mostBoughtToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-            console.log('token generated in mostBoughtOnGroww');
         }
 
         jwt.verify(mostBoughtToken, Secret_Key, async (err, decode) => {
             if (err) {
                 if (err.name === 'TokenExpiredError') {
-                    console.log('ok ==== 4');
                     console.log('Token expires -- process of new data in mostBoughtOnGroww');
                     const AllStockHeadData = await allStockHeadModel.find({});
                     if (!AllStockHeadData) {
@@ -68,26 +76,11 @@ const mostBoughtOnGroww = async (req, res) => {
                         return;
                     }
 
-                    for (let i = 1; i <= 4; i++) {
-                        const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                        const data = {
-                            stock_id: AllStockHeadData[random].stock_id,
-                            name: AllStockHeadData[random].name,
-                            logoUrl: AllStockHeadData[random].logoUrl,
-                            stockCost: AllStockHeadData[random].stockCost,
-                            stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                        }
+                    // save 4 random data
+                    await getRandomStockData(AllStockHeadData, mostBoughtModel);
 
-                        await mostBoughtModel.create(data);
-                    }
-                    // generate token
-
-                    const payload = {
-                        purpose: 'change data after 1m',
-                        type: 'auth token'
-                    }
-                    mostBoughtToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-                    console.log('token generated in mostBoughtOnGroww');
+                    // generate jwt         
+                    mostBoughtToken = generateToken(Secret_Key, 'mostBoughtOnGroww');
 
                 } else {
                     console.log('token auth fail in mostBoughtOnGroww');
@@ -128,27 +121,11 @@ const topGainer = async (req, res) => {
                 await topGainersModel.deleteMany({});
             }
 
-            for (let i = 1; i <= 4; i++) {
-                const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                const data = {
-                    stock_id: AllStockHeadData[random].stock_id,
-                    name: AllStockHeadData[random].name,
-                    logoUrl: AllStockHeadData[random].logoUrl,
-                    stockCost: AllStockHeadData[random].stockCost,
-                    stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                }
-
-                await topGainersModel.create(data);
-            }
+            // save 4 random data
+            await getRandomStockData(AllStockHeadData, topGainersModel);
 
             // generate jwt         
-
-            const payload = {
-                purpose: 'change data after 1m',
-                type: 'auth token'
-            }
-            topGainerToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-            console.log('token generated in topGainer');
+            topGainerToken = generateToken(Secret_Key, 'topGainer');
         }
 
         jwt.verify(topGainerToken, Secret_Key, async (err, decode) => {
@@ -167,26 +144,11 @@ const topGainer = async (req, res) => {
                         return;
                     }
 
-                    for (let i = 1; i <= 4; i++) {
-                        const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                        const data = {
-                            stock_id: AllStockHeadData[random].stock_id,
-                            name: AllStockHeadData[random].name,
-                            logoUrl: AllStockHeadData[random].logoUrl,
-                            stockCost: AllStockHeadData[random].stockCost,
-                            stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                        }
+                    // save 4 random data
+                    await getRandomStockData(AllStockHeadData, topGainersModel);
 
-                        await topGainersModel.create(data);
-                    }
-                    // generate token
-
-                    const payload = {
-                        purpose: 'change data after 1m',
-                        type: 'auth token'
-                    }
-                    topGainerToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-                    console.log('token generated in topGainer phase 2');
+                    // generate jwt         
+                    topGainerToken = generateToken(Secret_Key, 'topGainer');
 
                 } else {
                     console.log('token auth fail in topGainer')
@@ -227,27 +189,11 @@ const stockInNews = async (req, res) => {
                 await newsOfStockModel.deleteMany({});
             }
 
-            for (let i = 1; i <= 4; i++) {
-                const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                const data = {
-                    stock_id: AllStockHeadData[random].stock_id,
-                    name: AllStockHeadData[random].name,
-                    logoUrl: AllStockHeadData[random].logoUrl,
-                    stockCost: AllStockHeadData[random].stockCost,
-                    stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                }
-
-                await newsOfStockModel.create(data);
-            }
+            // save 4 random data
+            await getRandomStockData(AllStockHeadData, newsOfStockModel);
 
             // generate jwt         
-
-            const payload = {
-                purpose: 'change data after 1m',
-                type: 'auth token'
-            }
-            stockNewsToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-            console.log('token generated in stockInNews');
+            stockNewsToken = generateToken(Secret_Key, 'stockInNews');
         }
 
         jwt.verify(stockNewsToken, Secret_Key, async (err, decode) => {
@@ -266,26 +212,11 @@ const stockInNews = async (req, res) => {
                         return;
                     }
 
-                    for (let i = 1; i <= 4; i++) {
-                        const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                        const data = {
-                            stock_id: AllStockHeadData[random].stock_id,
-                            name: AllStockHeadData[random].name,
-                            logoUrl: AllStockHeadData[random].logoUrl,
-                            stockCost: AllStockHeadData[random].stockCost,
-                            stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                        }
+                    // save 4 random data
+                    await getRandomStockData(AllStockHeadData, newsOfStockModel);
 
-                        await newsOfStockModel.create(data);
-                    }
-                    // generate token
-
-                    const payload = {
-                        purpose: 'change data after 1m',
-                        type: 'auth token'
-                    }
-                    stockNewsToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-                    console.log('token generated in stockInNews phase 2');
+                    // generate jwt         
+                    stockNewsToken = generateToken(Secret_Key, 'stockInNews');
 
                 } else {
                     console.log('token auth fail in stockInNews')
@@ -326,27 +257,11 @@ const topLosers = async (req, res) => {
                 await topLosersModel.deleteMany({});
             }
 
-            for (let i = 1; i <= 4; i++) {
-                const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                const data = {
-                    stock_id: AllStockHeadData[random].stock_id,
-                    name: AllStockHeadData[random].name,
-                    logoUrl: AllStockHeadData[random].logoUrl,
-                    stockCost: AllStockHeadData[random].stockCost,
-                    stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                }
-
-                await topLosersModel.create(data);
-            }
+            // save 4 random data
+            await getRandomStockData(AllStockHeadData, topLosersModel);
 
             // generate jwt         
-
-            const payload = {
-                purpose: 'change data after 1m',
-                type: 'auth token'
-            }
-            topLoserToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-            console.log('token generated in topLosers');
+            topLoserToken = generateToken(Secret_Key, 'topLosers');
         }
 
         jwt.verify(topLoserToken, Secret_Key, async (err, decode) => {
@@ -365,26 +280,11 @@ const topLosers = async (req, res) => {
                         return;
                     }
 
-                    for (let i = 1; i <= 4; i++) {
-                        const random = Math.floor(Math.random() * (AllStockHeadData.length));
-                        const data = {
-                            stock_id: AllStockHeadData[random].stock_id,
-                            name: AllStockHeadData[random].name,
-                            logoUrl: AllStockHeadData[random].logoUrl,
-                            stockCost: AllStockHeadData[random].stockCost,
-                            stockCostPerRate: AllStockHeadData[random].stockCostPerRate
-                        }
+                    // save 4 random data
+                    await getRandomStockData(AllStockHeadData, topLosersModel);
 
-                        await topLosersModel.create(data);
-                    }
-                    // generate token
-
-                    const payload = {
-                        purpose: 'change data after 1m',
-                        type: 'auth token'
-                    }
-                    topLoserToken = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
-                    console.log('token generated in topLosers phase 2');
+                    // generate jwt         
+                    topLoserToken = generateToken(Secret_Key, 'topLosers');
 
                 } else {
                     console.log('token auth fail in topLosers')
