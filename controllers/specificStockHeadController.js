@@ -10,9 +10,9 @@ let topGainerToken = null;
 let stockNewsToken = null;
 let topLoserToken = null;
 
-const getRandomStockData = async (AllStockHeadData, currentModel) => {
+const getRandomStockData = async (AllStockHeadData, currentModel , length) => {
     const radomData = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= length; i++) {
         const random = Math.floor(Math.random() * (AllStockHeadData.length));
         const data = {
             stock_id: AllStockHeadData[random].stock_id,
@@ -53,7 +53,7 @@ const mostBoughtOnGroww = async (req, res) => {
             }
 
             // save 4 random data
-            await getRandomStockData(AllStockHeadData, mostBoughtModel);
+            await getRandomStockData(AllStockHeadData, mostBoughtModel , 4);
 
             // generate jwt         
             mostBoughtToken = generateToken(Secret_Key, 'mostBoughtOnGroww');
@@ -77,7 +77,7 @@ const mostBoughtOnGroww = async (req, res) => {
                     }
 
                     // save 4 random data
-                    await getRandomStockData(AllStockHeadData, mostBoughtModel);
+                    await getRandomStockData(AllStockHeadData, mostBoughtModel , 4);
 
                     // generate jwt         
                     mostBoughtToken = generateToken(Secret_Key, 'mostBoughtOnGroww');
@@ -122,7 +122,7 @@ const topGainer = async (req, res) => {
             }
 
             // save 4 random data
-            await getRandomStockData(AllStockHeadData, topGainersModel);
+            await getRandomStockData(AllStockHeadData, topGainersModel , 12);
 
             // generate jwt         
             topGainerToken = generateToken(Secret_Key, 'topGainer');
@@ -145,7 +145,7 @@ const topGainer = async (req, res) => {
                     }
 
                     // save 4 random data
-                    await getRandomStockData(AllStockHeadData, topGainersModel);
+                    await getRandomStockData(AllStockHeadData, topGainersModel , 12);
 
                     // generate jwt         
                     topGainerToken = generateToken(Secret_Key, 'topGainer');
@@ -190,7 +190,7 @@ const stockInNews = async (req, res) => {
             }
 
             // save 4 random data
-            await getRandomStockData(AllStockHeadData, newsOfStockModel);
+            await getRandomStockData(AllStockHeadData, newsOfStockModel , 4);
 
             // generate jwt         
             stockNewsToken = generateToken(Secret_Key, 'stockInNews');
@@ -213,7 +213,7 @@ const stockInNews = async (req, res) => {
                     }
 
                     // save 4 random data
-                    await getRandomStockData(AllStockHeadData, newsOfStockModel);
+                    await getRandomStockData(AllStockHeadData, newsOfStockModel , 4);
 
                     // generate jwt         
                     stockNewsToken = generateToken(Secret_Key, 'stockInNews');
@@ -258,7 +258,7 @@ const topLosers = async (req, res) => {
             }
 
             // save 4 random data
-            await getRandomStockData(AllStockHeadData, topLosersModel);
+            await getRandomStockData(AllStockHeadData, topLosersModel , 12);
 
             // generate jwt         
             topLoserToken = generateToken(Secret_Key, 'topLosers');
@@ -281,7 +281,7 @@ const topLosers = async (req, res) => {
                     }
 
                     // save 4 random data
-                    await getRandomStockData(AllStockHeadData, topLosersModel);
+                    await getRandomStockData(AllStockHeadData, topLosersModel , 12);
 
                     // generate jwt         
                     topLoserToken = generateToken(Secret_Key, 'topLosers');
