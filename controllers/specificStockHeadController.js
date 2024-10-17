@@ -31,7 +31,7 @@ const generateToken = (Secret_Key, happenFn) => {
         purpose: 'change data after 1m',
         type: 'auth token'
     }
-    const tokenVariable = jwt.sign(payload, Secret_Key, { expiresIn: '1m' });
+    const tokenVariable = jwt.sign(payload, Secret_Key, { expiresIn: '5m' });
     console.log(`token generated in ${happenFn}`);
     return tokenVariable;
 }

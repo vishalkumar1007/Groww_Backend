@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const allStockHeadSchema = new mongoose.Schema({
+    stock_id:{
+        type:String,
+        require:true
+    },
     name:{
         type:String,
         require:true
@@ -16,7 +20,7 @@ const allStockHeadSchema = new mongoose.Schema({
     stockCostPerRate:{
         type:String,
         require:true
-    }
+    },
 });
 
 const allStockHeadModel = mongoose.model('allStockHead',allStockHeadSchema);

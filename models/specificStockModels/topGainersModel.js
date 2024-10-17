@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const topGainersSchema = new mongoose.Schema({
+    stock_id:{
+        type:String,
+        require:true
+    },
     name:{
         type:String,
         require:true
